@@ -1,18 +1,24 @@
 package hello.core_self_practice.order;
 
+import hello.core_self_practice.AppConfig;
 import hello.core_self_practice.member.Grade;
 import hello.core_self_practice.member.Member;
 import hello.core_self_practice.member.MemberService;
-import hello.core_self_practice.member.MemberServiceImpl;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class OrderServiceImplTest {
 
-    MemberService memberService = new MemberServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
+    MemberService memberService;
+    OrderService orderService;
+
+    @BeforeEach
+    public void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+        orderService = appConfig.orderService();
+    }
 
     @Test
     void createOrder() {

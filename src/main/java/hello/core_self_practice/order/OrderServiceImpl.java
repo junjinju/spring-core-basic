@@ -1,17 +1,18 @@
 package hello.core_self_practice.order;
 
 import hello.core_self_practice.discount.DiscountPolicy;
-import hello.core_self_practice.discount.FixDiscountPolicy;
-import hello.core_self_practice.discount.RateDiscountPolicy;
 import hello.core_self_practice.member.Member;
 import hello.core_self_practice.member.MemberRepository;
-import hello.core_self_practice.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-//    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-     private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
