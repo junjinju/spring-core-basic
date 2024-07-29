@@ -1,6 +1,8 @@
 package hello.core_self_practice;
 
+import hello.core_self_practice.discount.DiscountPolicy;
 import hello.core_self_practice.discount.FixDiscountPolicy;
+import hello.core_self_practice.member.MemberRepository;
 import hello.core_self_practice.member.MemberService;
 import hello.core_self_practice.member.MemberServiceImpl;
 import hello.core_self_practice.member.MemoryMemberRepository;
@@ -27,17 +29,18 @@ public class AppConfig {
                 memberRepository(),
                 discountPolicy()
         );
+//        return null;
     }
 
     @Bean
-    public MemoryMemberRepository memberRepository() {
+    public MemberRepository memberRepository() {
         //2번? 3번?
         System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
-    public FixDiscountPolicy discountPolicy() {
+    public DiscountPolicy discountPolicy() {
         return new FixDiscountPolicy();
     }
 
