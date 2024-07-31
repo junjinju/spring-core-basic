@@ -2,9 +2,9 @@ package hello.core_self_practice.scop;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.inject.Provider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -28,10 +28,10 @@ public class PrototypeProviderTest {
     static class ClientBean {
 
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeProvider;
+        private Provider<PrototypeBean> prototypeProvider;
 
         public int logic() {
-            PrototypeBean prototypeBean = prototypeProvider.getObject();
+            PrototypeBean prototypeBean = prototypeProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
