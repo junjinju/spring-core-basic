@@ -4,8 +4,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
@@ -28,10 +28,10 @@ public class PrototypeProviderTest {
     static class ClientBean {
 
         @Autowired
-        private ApplicationContext ac;
+        private ObjectProvider<PrototypeBean> prototypeProvider;
 
         public int logic() {
-            PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
+            PrototypeBean prototypeBean = prototypeProvider.getObject();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
